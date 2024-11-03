@@ -11,7 +11,6 @@ const registerBox = async (req, res) => {
         await cash.save();
         return res.status(200).json(cash);
     } catch (error) {
-        console.log(error);
         if (error.name === 'ValidationError') {
             const msgs = Object.values(error.errors).map(val => val.message);
             return res.status(400).send({ error: msgs.join('. ') });
