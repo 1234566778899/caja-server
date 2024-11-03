@@ -57,7 +57,6 @@ const findAllBoxs = async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
 const deleteBox = async (req, res) => {
     try {
         const { id } = req.params;
