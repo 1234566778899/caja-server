@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/', registerBox);
 router.put('/:id', updateBox);
 router.get('/:id', findOneBox);
-router.get('/', findAllBoxs);
+router.get('/all/:id', findAllBoxs);
 router.delete('/:id', deleteBox);
 
 module.exports = router;

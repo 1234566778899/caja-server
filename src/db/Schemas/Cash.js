@@ -2,14 +2,18 @@ const { Schema, model } = require('mongoose');
 
 const CashSchema = Schema({
     codigo: { type: String, required: [true, 'El código es obligatorio'] },
-    concepto: Number,
+    concepto: String,
     cantidad: Number,
     valor_unitario: Number,
     importe_total: Number,
     fecha: Date,
     detalles: String,
-    numero_recibo: { type: String, required: [true, 'Número de recibo obligatorio'] },
-    tipo_pago: String
+    tipo_pago: String,
+    uid: String,
+    nombre: String,
+    dni: { type: String, required: [true, 'El dni es requerido'] },
+    domicilio: String,
+    telefono: String
 }, {
     timestamps: true
 })

@@ -2,10 +2,10 @@ const Cash = require("../db/Schemas/Cash");
 
 const registerBox = async (req, res) => {
     try {
-        const { numero_recibo } = req.body;
-        const found = await Cash.findOne({ numero_recibo });
+        const { codigo, uid } = req.body;
+        const found = await Cash.findOne({ codigo, uid });
         if (found) {
-            return res.status(400).send({ error: 'Número de recibo en uso' });
+            return res.status(400).send({ error: 'Código de pago en uso' });
         }
         const cash = new Cash(req.body);
         await cash.save();
@@ -46,13 +46,15 @@ const findOneBox = async (req, res) => {
 const findAllBoxs = async (req, res) => {
     try {
         let { limit, page } = req.query;
-        limit = limit || 10;
+        const { id } = req.params;
+        limit = limit || 20;
         page = page || 1;
         const skip = (page - 1) * limit;
-        const total = await Cash.countDocuments();
-        const docs = await Cash.find().sort({ createdAt: -1 }).skip(skip).limit(limit);
+        const total = await Cash.countDocuments({ uid: id });
+        const docs = await Cash.find({ uid: id }).sort({ createdAt: -1 }).skip(skip).limit(limit);
         return res.status(200).send({ total, docs });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
