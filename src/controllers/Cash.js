@@ -23,7 +23,7 @@ const updateBox = async (req, res) => {
         const { id } = req.params;
         const found = await Cash.findOne({ _id: id });
         if (!found) {
-            return res.status(400).send({ error: 'Caja no encontrada' });
+            return res.status(400).send({ error: 'Caja no encontrada ' });
         }
         const cash = await Cash.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
         return res.status(200).send(cash);
